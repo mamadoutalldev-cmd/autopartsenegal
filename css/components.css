@@ -1,0 +1,451 @@
+/* ==========================================================
+   COMPONENTS — éléments réutilisables sur plusieurs écrans
+   ========================================================== */
+
+/* Boutons */
+.btn{
+  font-family:var(--font-body);font-weight:600;font-size:14px;border:none;border-radius:var(--radius-md);
+  padding:13px 18px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:
+    background-color var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out);
+}
+/* Enfoncement au clic / au doigt (hors du bloc hover : doit marcher en tactile) */
+.btn:active{transform:scale(.96);}
+.btn-primary{background:var(--color-accent);color:#fff;}
+.btn-primary:active{background:var(--color-accent-active);}
+.btn-secondary{background:var(--color-surface);border:1.5px solid var(--color-secondary);color:var(--color-secondary);}
+.btn-secondary:active{background:var(--color-secondary-soft);}
+.btn-block{width:100%;}
+.icon-btn{
+  width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;color:#fff;cursor:pointer;position:relative;flex-shrink:0;
+}
+.cart-badge{
+  position:absolute;top:-3px;right:-3px;background:var(--color-accent);color:#fff;font-size:10px;font-weight:700;
+  min-width:17px;height:17px;border-radius:999px;display:flex;align-items:center;justify-content:center;
+  padding:0 3px;border:2px solid var(--color-primary);
+}
+.cart-badge.hide{display:none;}
+.logout-inline{
+  display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.16);color:#fff;border:none;
+  border-radius:999px;padding:8px 14px;font-size:11.5px;font-weight:700;cursor:pointer;margin-top:12px;
+}
+
+/* Champs de formulaire */
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:12.5px;font-weight:600;color:var(--color-text);margin-bottom:6px;}
+.field input, .field select, .field textarea{
+  width:100%;border:1px solid var(--color-border-strong);border-radius:var(--radius-md);padding:11px 12px;font-family:var(--font-body);
+  font-size:16px;color:var(--color-text);background:var(--color-surface);outline:none;
+  /* 16px minimum : en dessous, Safari iOS zoome automatiquement sur le champ au focus */
+}
+.field input:focus, .field select:focus, .field textarea:focus{border-color:var(--color-secondary);}
+.field textarea{resize:vertical;min-height:80px;}
+.field-row{display:flex;gap:10px;}
+.field-row .field{flex:1;}
+.upload-box{
+  border:1.5px dashed var(--color-border-dashed);border-radius:var(--radius-md);padding:24px 12px;text-align:center;color:var(--color-muted);
+  font-size:12.5px;cursor:pointer;
+}
+.upload-box svg{margin-bottom:6px;color:var(--color-secondary);}
+
+/* Titres de section */
+.section-title{
+  font-family:var(--font-heading); font-weight:700; font-size:15px;
+  padding:18px 16px 10px; color:var(--color-text);
+}
+.section-title .see-all{float:right;font-family:var(--font-body);font-weight:600;font-size:12px;color:var(--color-secondary);}
+
+/* Barre de recherche */
+.search-wrap{padding:14px 16px 6px;}
+.search-bar{
+  background:var(--color-surface);
+  border-radius:var(--radius-md);
+  box-shadow:var(--shadow-card);
+  display:flex; align-items:center; gap:8px;
+  padding:12px 14px;
+  border:1px solid transparent;
+}
+.search-bar:focus-within{border-color:var(--color-secondary);}
+.search-bar input{
+  border:none; outline:none; flex:1; font-family:var(--font-body); font-size:14px; color:var(--color-text); background:transparent;
+}
+.search-bar input::placeholder{color:var(--color-muted);}
+.search-bar svg{flex-shrink:0;color:var(--color-muted);}
+
+/* Chips / pills / catégories */
+.cat-scroll{display:flex; gap:10px; overflow-x:auto; padding:0 16px 4px; scrollbar-width:none;}
+.cat-scroll::-webkit-scrollbar{display:none;}
+.cat-chip{flex-shrink:0; width:76px; display:flex; flex-direction:column; align-items:center; gap:6px; cursor:pointer;}
+.cat-chip .ic{
+  width:56px;height:56px;border-radius:16px;background:var(--color-surface);
+  box-shadow:var(--shadow-card);
+  display:flex;align-items:center;justify-content:center;color:var(--color-secondary);
+}
+.cat-chip span{font-size:11px;text-align:center;color:var(--color-muted);font-weight:500;line-height:1.2;}
+.cat-chip.active .ic{background:var(--color-accent);color:#fff;}
+.cat-chip.active span{color:var(--color-text);font-weight:600;}
+
+.pill-row{display:flex;gap:8px;flex-wrap:wrap;padding:0 16px;}
+.pill{
+  padding:7px 14px;border-radius:999px;background:var(--color-surface);border:1px solid var(--color-border);
+  font-size:12.5px;font-weight:500;color:var(--color-text);cursor:pointer;
+}
+.pill.active{background:var(--color-fill-strong);color:#fff;border-color:var(--color-fill-strong);}
+
+.filter-bar{display:flex;gap:8px;padding:10px 16px;overflow-x:auto;scrollbar-width:none;}
+.filter-bar::-webkit-scrollbar{display:none;}
+.filter-chip{
+  flex-shrink:0;display:flex;align-items:center;gap:5px;padding:8px 12px;border-radius:999px;
+  background:var(--color-surface);border:1px solid var(--color-border);font-size:12px;font-weight:600;color:var(--color-text);cursor:pointer;
+}
+.filter-chip svg{width:13px;height:13px;color:var(--color-muted);}
+.result-count{padding:2px 16px 4px;font-size:12px;color:var(--color-muted);}
+
+/* Cartes produit (grille + liste) */
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:14px 16px 4px;}
+.card{
+  background:var(--color-surface);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);
+  overflow:hidden;cursor:pointer;display:flex;flex-direction:column;
+}
+.card .thumb{
+  height:96px;background:linear-gradient(135deg,var(--placeholder-from),var(--placeholder-to));display:flex;align-items:center;justify-content:center;color:var(--placeholder-icon);position:relative;
+}
+.card .avail{position:absolute;top:8px;left:8px;font-size:10px;font-weight:600;padding:3px 8px;border-radius:999px;}
+.avail.ok{background:rgba(22,163,74,.12);color:var(--color-success);}
+.avail.no{background:rgba(220,38,38,.12);color:var(--color-error);}
+.card .body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:3px;}
+.card .name{font-size:13px;font-weight:600;color:var(--color-text);line-height:1.25;}
+.card .compat{font-size:11px;color:var(--color-muted);}
+.card .price{font-family:var(--font-heading);font-weight:700;font-size:15px;color:var(--color-strong);margin-top:4px;}
+.card .loc{font-size:10.5px;color:var(--color-muted);display:flex;align-items:center;gap:3px;margin-top:2px;}
+
+.list{display:flex;flex-direction:column;gap:10px;padding:10px 16px 4px;}
+.row-card{
+  display:flex;gap:12px;background:var(--color-surface);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);
+  padding:10px;cursor:pointer;
+}
+.row-card .thumb{width:76px;height:76px;border-radius:var(--radius-md);flex-shrink:0;background:linear-gradient(135deg,var(--placeholder-from),var(--placeholder-to));display:flex;align-items:center;justify-content:center;color:var(--placeholder-icon);}
+.row-card .info{flex:1;display:flex;flex-direction:column;justify-content:center;gap:3px;min-width:0;}
+.row-card .name{font-size:13.5px;font-weight:600;}
+.row-card .compat{font-size:11.5px;color:var(--color-muted);}
+.row-card .bottom{display:flex;align-items:center;justify-content:space-between;margin-top:4px;}
+.row-card .price{font-family:var(--font-heading);font-weight:700;font-size:14px;color:var(--color-strong);}
+
+/* Panier — item de liste */
+.cart-item{display:flex;gap:12px;background:var(--color-surface);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);padding:10px;}
+.cart-item .thumb{width:64px;height:64px;border-radius:var(--radius-md);flex-shrink:0;background:linear-gradient(135deg,var(--placeholder-from),var(--placeholder-to));display:flex;align-items:center;justify-content:center;color:var(--placeholder-icon);}
+.cart-item .info{flex:1;display:flex;flex-direction:column;justify-content:center;gap:4px;min-width:0;}
+.cart-item .name{font-size:13px;font-weight:600;}
+.cart-item .price{font-family:var(--font-heading);font-weight:700;font-size:13.5px;color:var(--color-strong);}
+.cart-item .row-bottom{display:flex;align-items:center;justify-content:space-between;}
+.qty-stepper{display:flex;align-items:center;gap:8px;background:var(--color-surface-alt);border-radius:999px;padding:4px;}
+.qty-stepper button{width:36px;height:36px;border:none;border-radius:50%;background:var(--color-surface);box-shadow:var(--shadow-card);font-size:15px;font-weight:700;color:var(--color-text);cursor:pointer;}
+.qty-stepper span{font-size:12.5px;font-weight:600;min-width:14px;text-align:center;}
+.cart-remove{color:var(--color-error);font-size:11.5px;font-weight:600;cursor:pointer;}
+
+/* Badges de statut */
+.status-pill{font-size:10.5px;font-weight:600;padding:4px 9px;border-radius:999px;}
+.status-pill.pending{background:rgba(255,138,0,.12);color:var(--color-accent);}
+.status-pill.done{background:rgba(22,163,74,.12);color:var(--color-success);}
+
+/* Stats (dashboards) */
+.stat-row{display:flex;gap:10px;padding:14px 16px 4px;}
+.stat-card{flex:1;background:var(--color-surface);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);padding:14px;}
+.stat-card .num{font-family:var(--font-heading);font-weight:700;font-size:20px;color:var(--color-strong);}
+.stat-card .lbl{font-size:11px;color:var(--color-muted);margin-top:2px;}
+
+/* Onglets */
+.tab-row{display:flex;gap:6px;padding:16px 16px 6px;}
+.tab-btn{
+  flex:1;text-align:center;padding:9px;border-radius:var(--radius-sm);font-size:12.5px;font-weight:600;color:var(--color-muted);
+  background:var(--color-surface-alt);cursor:pointer;
+}
+.tab-btn.active{background:var(--color-fill-strong);color:#fff;}
+
+/* Liste de commandes (vendeur) */
+.order-item{
+  display:flex;justify-content:space-between;align-items:center;background:var(--color-surface);
+  border-radius:var(--radius-md);box-shadow:var(--shadow-card);padding:12px 14px;margin:0 16px 10px;
+}
+.order-item .oname{font-size:13px;font-weight:600;}
+.order-item .ometa{font-size:11px;color:var(--color-muted);margin-top:2px;}
+
+/* Bouton flottant */
+.fab{
+  position:fixed;bottom:96px;right:16px;width:52px;height:52px;border-radius:50%;
+  background:var(--color-accent);color:#fff;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 16px rgba(255,138,0,.35);cursor:pointer;z-index:25;
+}
+
+/* État vide */
+.empty-state{padding:60px 30px;text-align:center;}
+.empty-state svg{color:var(--color-border-dashed);margin-bottom:14px;}
+.empty-state p{color:var(--color-muted);font-size:13.5px;margin-bottom:16px;}
+
+/* Toast */
+.toast{
+  position:fixed;top:16px;left:50%;transform:translateX(-50%);background:var(--color-success);color:#fff;
+  padding:11px 20px;border-radius:999px;font-size:13px;font-weight:600;box-shadow:0 6px 18px rgba(22,163,74,.3);
+  z-index:200;opacity:0;pointer-events:none;transition:.3s;display:flex;align-items:center;gap:8px;
+}
+.toast.show{opacity:1;top:26px;}
+
+/* Carte / menu profil */
+.profile-card{display:flex;align-items:center;gap:14px;background:var(--color-surface);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);padding:16px;margin-bottom:18px;}
+.profile-avatar{width:52px;height:52px;border-radius:50%;background:var(--color-fill-strong);color:#fff;font-family:var(--font-heading);font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.profile-name{font-size:15px;font-weight:700;font-family:var(--font-heading);}
+.profile-phone{font-size:12.5px;color:var(--color-muted);margin-top:2px;}
+.profile-menu{background:var(--color-surface);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);overflow:hidden;}
+.profile-item{padding:15px 16px;font-size:13.5px;font-weight:600;border-bottom:1px solid var(--color-divider);cursor:pointer;}
+.profile-item:last-child{border-bottom:none;}
+.profile-item.logout{color:var(--color-error);}
+
+/* Bandeau de bienvenue (dashboards par rôle) */
+.welcome-banner{
+  margin:14px 16px 4px;background:linear-gradient(120deg,var(--color-primary),var(--color-secondary-base));
+  border-radius:var(--radius-lg);padding:18px;color:#fff;position:relative;overflow:hidden;
+}
+.welcome-banner .role-badge{
+  display:inline-block;background:rgba(255,255,255,.18);font-size:10.5px;font-weight:700;letter-spacing:.4px;
+  padding:4px 10px;border-radius:999px;margin-bottom:8px;text-transform:uppercase;
+}
+.welcome-banner h2{font-family:var(--font-heading);font-size:17px;font-weight:700;}
+.welcome-banner p{font-size:12px;color:#D9E4F5;margin-top:3px;}
+
+/* Classes utilitaires génériques (non utilisées actuellement dans le HTML,
+   conservées telles quelles depuis l'original — ne pas supprimer arbitrairement) */
+.top-logout-only{padding:16px;text-align:center;}
+.simple-dashboard{padding-bottom:40px;}
+
+/* ==========================================================
+   MICRO-INTERACTIONS — survol (souris/trackpad uniquement)
+   Le survol ne doit jamais "coller" sur tactile après un tap :
+   on le limite aux appareils qui ont un vrai pointeur fin.
+   Courbe et durées : tokens --ease-out / --duration-* (variables.css)
+   ========================================================== */
+@media (hover:hover) and (pointer:fine){
+
+  /* Cartes produit (grille + liste) et pastilles de catégorie :
+     léger lift, ombre qui s'intensifie, fin liseré orange (accent) */
+  .card, .row-card, .cat-chip .ic{
+    box-shadow:var(--shadow-card), 0 0 0 1px rgba(255,138,0,0);
+    transition:
+      transform var(--duration-base) var(--ease-out),
+      box-shadow var(--duration-base) var(--ease-out);
+  }
+  .card:hover, .row-card:hover{
+    transform:translateY(-3px);
+    box-shadow:var(--shadow-md), 0 0 0 1px var(--color-accent-border);
+  }
+  .cat-chip:hover .ic{
+    transform:translateY(-2px);
+    box-shadow:var(--shadow-md), 0 0 0 1px var(--color-accent-border);
+  }
+
+  /* Boutons : changement de couleur fluide (la transition est définie sur .btn) */
+  .btn-primary:hover{background:var(--color-accent-hover);}
+  /* Sans cette règle, :hover (déclaré plus bas que :active) l'emporterait pendant le clic à la souris */
+  .btn-primary:hover:active{background:var(--color-accent-active);}
+  .btn-secondary:hover{
+    background:var(--color-secondary-soft);
+    border-color:var(--color-secondary-hover);
+    color:var(--color-secondary-hover);
+  }
+
+  .page-back-btn, .detail-hero .back-btn{
+    transition:transform var(--duration-fast) var(--ease-out), background var(--duration-fast) var(--ease-out);
+  }
+  .page-back-btn:hover{background:var(--color-fill-strong);color:#fff;transform:translateX(-2px);}
+  .detail-hero .back-btn:hover{background:var(--color-surface);transform:translateX(-2px);}
+
+
+  .pill{transition:border-color var(--duration-fast) var(--ease-out);}
+  .pill:hover{border-color:var(--color-secondary);}
+
+  nav.bottom .nav-item{transition:color var(--duration-fast) var(--ease-out);}
+  nav.bottom .nav-item:hover{color:var(--color-secondary);}
+
+  .qty-stepper button{transition:background var(--duration-fast) var(--ease-out);}
+  .qty-stepper button:hover{background:var(--color-background);}
+
+  .profile-item{transition:background var(--duration-fast) var(--ease-out);}
+  .profile-item:hover{background:var(--color-surface-hover);}
+}
+
+/* ==========================================================
+   APPARITION AU SCROLL
+   Les classes sont posées par initReveal() (js/ui.js).
+   On utilise la propriété `translate` (et non `transform`) pour ne pas
+   entrer en conflit avec le lift au survol des cartes.
+   ========================================================== */
+.reveal{opacity:0;}
+.reveal.is-visible{
+  opacity:1;
+  animation:revealIn var(--duration-slow) var(--ease-out) var(--reveal-delay, 0ms) backwards;
+}
+@keyframes revealIn{
+  from{opacity:0; translate:0 14px;}
+  to{opacity:1; translate:0 0;}
+}
+
+/* ==========================================================
+   SQUELETTES DE CHARGEMENT
+   Calqués sur .card (grille) et .row-card (liste) : mêmes rayons, même ombre,
+   hauteurs de lignes proches des vraies pour limiter le saut de mise en page.
+   Fabriqués par renderProductSkeleton() (js/ui.js).
+   ========================================================== */
+.skeleton-card{
+  background:var(--color-surface);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);
+  overflow:hidden;display:flex;flex-direction:column;pointer-events:none;
+}
+.skeleton-image, .skeleton-text{
+  position:relative;overflow:hidden;background:var(--skeleton-base);
+}
+/* Reflet : dégradé orange très transparent qui balaie la forme (GPU : transform uniquement) */
+.skeleton-image::after, .skeleton-text::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(100deg, transparent 15%, var(--skeleton-shine) 50%, transparent 85%);
+  transform:translateX(-100%);
+  animation:skeletonSweep 1.4s var(--ease-out) infinite;
+}
+@keyframes skeletonSweep{to{transform:translateX(100%);}}
+
+.skeleton-image{height:96px;}                       /* = .card .thumb */
+.skeleton-body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:3px;} /* = .card .body */
+.skeleton-text{border-radius:6px;}
+.skeleton-text--title{width:80%;height:10px;margin:3px 0;}        /* ligne de 16px  = .name */
+.skeleton-text--sub{width:58%;height:8px;margin:2.5px 0;}         /* ligne de 13px  = .compat */
+.skeleton-text--price{width:42%;height:14px;margin:8px 0 0;}      /* 22px avec marge = .price */
+.skeleton-text--loc{width:34%;height:8px;margin:4.5px 0 2.5px;}   /* 15px           = .loc */
+
+/* Variante liste (= .row-card) */
+.skeleton-card--row{flex-direction:row;gap:12px;padding:10px;}
+.skeleton-card--row .skeleton-image{width:76px;height:76px;flex-shrink:0;border-radius:var(--radius-md);}
+.skeleton-card--row .skeleton-body{flex:1;padding:0;justify-content:center;min-width:0;}
+.skeleton-card--row .skeleton-text--title{width:70%;margin:3.5px 0;}
+.skeleton-card--row .skeleton-text--price{width:34%;height:14px;margin:8px 0 0;}
+
+/* ---- Bouton clair / sombre (header) ----
+   Lune en mode clair (clic = passer en sombre), soleil en mode sombre. */
+.theme-toggle{margin-left:auto;border:0;padding:0;font:inherit;}
+.theme-toggle + .header-actions{margin-left:6px;}   /* le bouton prend le "auto" à la place de .header-actions */
+.theme-toggle .icon-sun{display:none;}
+:root[data-theme="dark"] .theme-toggle .icon-moon{display:none;}
+:root[data-theme="dark"] .theme-toggle .icon-sun{display:block;}
+.icon-btn:focus-visible{outline:2px solid #fff;outline-offset:2px;}
+
+/* ==========================================================
+   VERRE LIQUIDE — pastille qui glisse + boutons ronds
+   ========================================================== */
+
+/* ---- Pastille qui glisse entre les onglets / items de la barre du bas ----
+   Créée et déplacée par initGliders() (js/ui.js). Un seul élément par groupe : il se
+   déplace (transform) vers l'onglet actif au lieu que le fond saute d'un onglet à l'autre. */
+.auth-tabs, .role-tabs{position:relative;}
+.auth-tab, .role-tab, nav.bottom .nav-item{position:relative;z-index:1;}   /* texte au-dessus de la pastille */
+
+.glider{
+  position:absolute; top:0; left:0; z-index:0; pointer-events:none;
+  border-radius:8px;
+  background:var(--glass-bg);
+  box-shadow:
+    inset 0 1px 0 var(--glass-edge),      /* liseré lumineux en haut */
+    inset 0 0 0 1px var(--glass-rim),     /* contour fin */
+    0 3px 10px var(--glass-shadow);       /* ombre douce dessous */
+  -webkit-backdrop-filter:blur(var(--glass-blur)) saturate(1.3);
+  backdrop-filter:blur(var(--glass-blur)) saturate(1.3);
+  opacity:0;
+  transition:
+    transform var(--glider-duration) var(--ease-glide),
+    width var(--glider-duration) var(--ease-glide),
+    height var(--glider-duration) var(--ease-glide),
+    opacity var(--duration-fast) ease;
+  will-change:transform;
+}
+.glider.is-on{opacity:1;}
+.glider.no-anim{transition:none;}          /* placement initial : pas de glissement depuis le coin */
+.glider--nav{border-radius:14px;background:var(--glass-nav-bg);}
+
+/* Si le JS ne tourne pas, l'onglet actif garde son ancien fond (voir screens.css) ;
+   dès que la pastille existe (.has-glider), c'est elle qui fait le fond. */
+.has-glider .auth-tab.active, .has-glider .role-tab.active{background:transparent;box-shadow:none;}
+
+/* Navigateurs sans flou d'arrière-plan : pastille translucide simple */
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .glider{background:var(--color-surface);}
+  .glider--nav{background:var(--color-accent-soft);}
+}
+
+/* ---- Boutons ronds du header (panier, compte, thème) : goutte de verre ---- */
+.icon-btn{
+  background:rgba(255,255,255,.10);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.30),
+    inset 0 0 0 1px rgba(255,255,255,.10),
+    0 2px 8px rgba(0,0,0,.20);
+  -webkit-backdrop-filter:blur(6px);
+  backdrop-filter:blur(6px);
+  transition:
+    transform var(--duration-base) var(--ease-out),
+    background-color var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
+@media (hover:hover) and (pointer:fine){
+  .icon-btn:hover{
+    transform:scale(1.08);                       /* léger gonflement */
+    background:rgba(255,255,255,.18);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.42),
+      inset 0 0 0 1px rgba(255,255,255,.16),
+      0 4px 12px rgba(0,0,0,.28);
+  }
+}
+/* Après le bloc survol : sinon, à la souris, le survol l'emporterait sur l'appui */
+.icon-btn:active, .page-back-btn:active{transform:scale(.94);}
+
+/* ==========================================================
+   ALERTE DE CONNEXION — pastille flottante sous le header (js/network.js)
+   Rouge = hors ligne (reste affichée) · Vert = connexion rétablie (disparaît seule).
+   z-index 90 : sous l'écran de démarrage (100) et sous le toast (200), au-dessus du contenu.
+   ========================================================== */
+.net-status{
+  position:absolute; top:76px; left:0; right:0; margin:0 auto;
+  width:max-content; max-width:calc(100% - 32px);
+  z-index:90;
+  display:flex; align-items:center; gap:8px;
+  padding:9px 16px 9px 12px;
+  border-radius:999px;
+  border:1px solid var(--net-border, transparent);
+  background-color:var(--net-bg, var(--color-surface));
+  color:var(--net-text, var(--color-text));
+  font-size:13px; font-weight:600; line-height:1.2;
+  box-shadow:var(--shadow-md);
+  /* état caché : au-dessus de sa position finale, transparent, non cliquable */
+  opacity:0; visibility:hidden; transform:translateY(-14px); pointer-events:none;
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out),
+    background-color var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out),
+    visibility 0s linear var(--duration-slow);   /* ne devient "hidden" qu'après la fin du fondu */
+}
+.net-status.is-visible{
+  opacity:1; visibility:visible; transform:none;
+  transition:
+    opacity var(--duration-base) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out),
+    background-color var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out),
+    visibility 0s;
+}
+.net-status--offline{--net-bg:var(--net-off-bg); --net-border:var(--net-off-border); --net-text:var(--net-off-text); --net-icon:var(--color-error);}
+.net-status--online {--net-bg:var(--net-on-bg);  --net-border:var(--net-on-border);  --net-text:var(--net-on-text);  --net-icon:var(--color-success);}
+
+.net-icon{flex-shrink:0; color:var(--net-icon, currentColor);}
+.net-status--offline .net-icon--on, .net-status--online .net-icon--off{display:none;}

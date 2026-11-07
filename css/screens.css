@@ -1,0 +1,187 @@
+/* ==========================================================
+   SCREENS — styles spécifiques à un seul écran
+   (non réutilisés ailleurs ; voir components.css pour le reste)
+   ========================================================== */
+
+/* ---- Splash ----
+   Séquence : logo (0 s) → barre + pourcentage (0,3 s) → slogan (0,5 s).
+   La progression 0 → 100 % est pilotée par js/app.js (runSplash) : durée = SPLASH_DURATION_MS.
+   Une seule couleur d'accent (orange) en dehors du logo. */
+.splash-content{
+  width:min(78%, 320px);
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  gap:34px;
+}
+.splash-logo-card{
+  background:#fff;                 /* reste blanc dans les 2 thèmes : le logo a un fond blanc */
+  border-radius:20px;
+  padding:16px 20px;
+  opacity:0;
+}
+.splash-logo-img{display:block; width:100%; height:auto;}
+
+/* Barre de progression : plus épaisse pour qu'on la voie, unie, sans halo ni reflet */
+.splash-track{
+  align-self:center;
+  width:64%;
+  height:6px;
+  border-radius:999px;
+  background:rgba(255,255,255,.16);
+  overflow:hidden;
+  opacity:0;
+}
+.splash-bar, .splash-bar-fill{height:100%; border-radius:inherit;}
+.splash-bar{width:100%;}
+.splash-bar-fill{
+  width:100%;
+  background:var(--color-accent);
+  transform:scaleX(0);              /* piloté en JS */
+  transform-origin:left center;
+  will-change:transform;
+}
+
+/* Pourcentage (optionnel : voir <div id="splash-percent"> dans index.html) */
+.splash-percent{
+  align-self:center;
+  margin-top:-18px;
+  font-family:var(--font-heading); font-weight:600; font-size:12px;
+  letter-spacing:.08em;
+  font-variant-numeric:tabular-nums;   /* les chiffres ne "sautillent" pas */
+  color:rgba(255,255,255,.75);
+  opacity:0;
+}
+
+.splash-slogan-bottom{
+  position:absolute; left:0; right:0;
+  bottom:calc(30px + env(safe-area-inset-bottom, 0px));
+  text-align:center;
+  font-family:var(--font-heading); font-weight:700;
+  font-size:11px; letter-spacing:.24em; text-indent:.24em;
+  color:rgba(255,255,255,.75);
+  opacity:0;
+}
+
+/* Animations d'entrée (uniquement une fois le logo prêt) */
+#splash.run .splash-logo-card{animation:splashPop .5s var(--ease-out) forwards;}
+#splash.run .splash-track{animation:splashFade .4s ease .3s forwards;}
+#splash.run .splash-percent{animation:splashFade .4s ease .3s forwards;}
+#splash.run .splash-slogan-bottom{animation:splashFade .6s ease .5s forwards;}
+
+@keyframes splashPop{from{opacity:0; transform:scale(.96);} to{opacity:1; transform:none;}}
+@keyframes splashFade{to{opacity:1;}}
+
+/* ---- Connexion ---- */
+.login-wrap{padding:36px 24px 24px; min-height:calc(100vh - 60px); display:flex; flex-direction:column;}
+.login-logo-card{background:#fff; /* reste blanc dans les 2 thèmes : le logo a un fond blanc */border-radius:16px;padding:12px 16px;box-shadow:var(--shadow-card);margin:0 auto 22px;max-width:220px;}
+.login-logo-card img{display:block;width:100%;height:auto;}
+.login-title{font-family:var(--font-heading);font-weight:700;font-size:19px;text-align:center;margin-bottom:4px;}
+.login-sub{text-align:center;color:var(--color-muted);font-size:13px;margin-bottom:24px;}
+.role-tabs{display:flex;gap:6px;background:var(--color-surface-alt);border-radius:var(--radius-md);padding:4px;margin-bottom:20px;}
+.role-tab{flex:1;text-align:center;padding:9px 4px;border-radius:8px;font-size:11.5px;font-weight:700;color:var(--color-muted);cursor:pointer;}
+.role-tab.active{background:var(--color-surface);color:var(--color-strong);box-shadow:var(--shadow-card);}
+
+.auth-tabs{display:flex;gap:6px;background:var(--color-surface-alt);border-radius:var(--radius-md);padding:4px;margin-bottom:14px;}
+.auth-tab{flex:1;text-align:center;padding:10px 4px;border-radius:8px;font-size:13px;font-weight:700;color:var(--color-muted);cursor:pointer;}
+.auth-tab.active{background:var(--color-surface);color:var(--color-strong);box-shadow:var(--shadow-card);}
+
+.forgot-password{
+  text-align:center;font-size:12.5px;font-weight:600;color:var(--color-secondary);
+  cursor:pointer;margin-top:14px;
+}
+.test-account-hint{
+  background:var(--color-secondary-soft);border:1px solid var(--color-secondary-border);border-radius:var(--radius-md);
+  padding:10px 12px;font-size:11.5px;color:var(--color-secondary);margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;gap:8px;
+}
+.test-account-hint button{
+  background:var(--color-secondary-base);color:#fff;border:none;border-radius:8px;padding:6px 10px;font-size:11px;font-weight:700;cursor:pointer;flex-shrink:0;
+}
+.login-error{color:var(--color-error);font-size:12px;font-weight:600;margin:-6px 0 12px;display:none;}
+.login-error.show{display:block;}
+.login-footer{margin-top:auto;text-align:center;font-size:11.5px;color:var(--color-muted);padding-top:20px;}
+
+/* ---- Fiche produit ---- */
+.detail-hero{
+  height:230px;background:linear-gradient(135deg,var(--placeholder-to),var(--placeholder-from));display:flex;align-items:center;justify-content:center;color:var(--placeholder-icon);
+  position:relative;
+}
+.detail-hero .back-btn{
+  position:absolute;top:14px;left:14px;width:36px;height:36px;border-radius:50%;background:var(--color-overlay-btn);
+  display:flex;align-items:center;justify-content:center;color:var(--color-text);
+  box-shadow:inset 0 1px 0 var(--glass-edge), inset 0 0 0 1px var(--glass-rim), 0 3px 10px var(--glass-shadow);
+  -webkit-backdrop-filter:blur(var(--glass-blur));backdrop-filter:blur(var(--glass-blur));cursor:pointer;
+}
+.page-back-btn{
+  width:38px;height:38px;border-radius:50%;background:var(--glass-flat);
+  display:flex;align-items:center;justify-content:center;color:var(--color-strong);
+  box-shadow:inset 0 1px 0 var(--glass-edge), inset 0 0 0 1px var(--glass-rim), 0 3px 10px var(--glass-shadow);
+  -webkit-backdrop-filter:blur(var(--glass-blur));backdrop-filter:blur(var(--glass-blur));
+  cursor:pointer;margin-bottom:18px;
+}
+.detail-hero .dots{position:absolute;bottom:12px;left:0;right:0;display:flex;justify-content:center;gap:5px;}
+.detail-hero .dots span{width:6px;height:6px;border-radius:50%;background:var(--color-dot);}
+.detail-hero .dots span.on{background:var(--color-strong);}
+.detail-body{padding:18px 16px 100px;}
+.detail-body .badge-row{display:flex;gap:8px;align-items:center;margin-bottom:8px;}
+.detail-body h1{font-family:var(--font-heading);font-size:19px;font-weight:700;line-height:1.3;}
+.detail-body .ref{font-size:12px;color:var(--color-muted);margin-top:3px;}
+.detail-body .price-lg{font-family:var(--font-heading);font-weight:700;font-size:26px;color:var(--color-strong);margin:12px 0;}
+.info-line{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--color-divider);font-size:13.5px;}
+.info-line svg{color:var(--color-secondary);flex-shrink:0;}
+.info-line .label{color:var(--color-muted);width:110px;flex-shrink:0;}
+.info-line .val{font-weight:600;}
+.desc{font-size:13.5px;line-height:1.6;color:var(--color-text);margin-top:14px;}
+.compat-h3{font-family:var(--font-heading);font-size:14px;margin-bottom:6px;margin-top:16px;}
+.compat-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;}
+.compat-tags span{background:var(--color-surface-alt);color:var(--color-text);font-size:11.5px;font-weight:500;padding:6px 10px;border-radius:999px;}
+.sticky-cta{
+  position:fixed;bottom:64px;left:0;right:0;max-width:420px;margin:0 auto;
+  background:var(--color-surface);padding:12px 16px;box-shadow:var(--shadow-up);
+  display:flex;gap:10px;z-index:20;
+}
+
+/* ---- Formulaires pleine page (publier / demande garage) ---- */
+.form-page{padding:16px;}
+.form-page h2{font-family:var(--font-heading);font-size:17px;margin-bottom:4px;}
+.form-page .sub{font-size:12.5px;color:var(--color-muted);margin-bottom:18px;}
+
+/* ---- Panier ---- */
+.cart-summary{padding:16px;}
+.cart-row{display:flex;justify-content:space-between;font-size:13.5px;color:var(--color-muted);padding:6px 0;}
+.cart-row.total{font-size:16px;font-weight:700;color:var(--color-text);border-top:1px solid var(--color-divider);margin-top:6px;padding-top:12px;}
+.cart-row.total span:last-child{color:var(--color-strong);font-family:var(--font-heading);}
+
+/* ---- Paiement ---- */
+.pay-options{display:flex;flex-direction:column;gap:10px;margin-bottom:18px;}
+.pay-option{
+  display:flex;align-items:center;gap:12px;background:var(--color-surface);border:1.5px solid var(--color-border);border-radius:var(--radius-md);
+  padding:13px 14px;cursor:pointer;font-size:13.5px;font-weight:600;
+}
+.pay-option:has(input:checked){border-color:var(--color-secondary); background:var(--color-secondary-soft);}
+.pay-option input{accent-color:var(--color-secondary);width:16px;height:16px;}
+.pay-ic{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px;}
+.pay-ic.wave{background:var(--color-secondary-soft);color:var(--color-secondary);}
+.pay-ic.om{background:var(--color-accent-soft);color:var(--color-accent);}
+.pay-ic.cash{background:rgba(22,163,74,.12);color:var(--color-success);}
+.order-total{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-top:1px solid var(--color-divider);margin-bottom:16px;font-size:14px;font-weight:600;}
+.order-total span:last-child{font-family:var(--font-heading);font-size:19px;color:var(--color-strong);}
+
+/* ---- Confirmation de commande ---- */
+.success-check{
+  width:64px;height:64px;border-radius:50%;background:rgba(22,163,74,.12);color:var(--color-success);
+  display:flex;align-items:center;justify-content:center;margin:0 auto 16px;
+}
+.timeline{display:flex;flex-direction:column;gap:0;text-align:left;max-width:260px;margin:26px auto 0;}
+.timeline-step{display:flex;align-items:center;gap:12px;font-size:13.5px;font-weight:600;color:var(--color-muted);padding:10px 0;position:relative;}
+.timeline-step .dot{width:12px;height:12px;border-radius:50%;background:var(--color-border);flex-shrink:0;}
+.timeline-step.done .dot, .timeline-step.active .dot{background:var(--color-success);}
+.timeline-step.done, .timeline-step.active{color:var(--color-text);}
+
+/* ---- Dashboard Admin ---- */
+.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px;}
+.admin-stat{background:var(--color-surface);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);padding:16px;}
+.admin-stat .ic{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:10px;}
+.admin-stat .num{font-family:var(--font-heading);font-weight:700;font-size:22px;color:var(--color-text);}
+.admin-stat .lbl{font-size:11.5px;color:var(--color-muted);margin-top:2px;}
+.admin-placeholder-note{margin:4px 16px 16px;font-size:11.5px;color:var(--color-muted);background:var(--color-surface-alt);border-radius:var(--radius-md);padding:12px;}

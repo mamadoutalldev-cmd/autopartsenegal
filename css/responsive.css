@@ -1,0 +1,59 @@
+/* ==========================================================
+   RESPONSIVE — media queries
+   Breakpoints : 768px (tablette), 1024px (desktop), 1280px (grand écran)
+   ========================================================== */
+
+/* ---- Tablette : le cadre s'élargit, la grille passe à 3 colonnes ---- */
+@media (min-width:768px){
+  .phone{ max-width:680px; }
+  .grid{ grid-template-columns:repeat(3,1fr); }
+}
+
+/* ---- Desktop : la nav du bas devient une sidebar verticale (pattern SaaS),
+   le header s'étale sur toute la largeur, la grille passe à 4 colonnes ---- */
+@media (min-width:1024px){
+  .phone{
+    max-width:1100px;
+    display:grid;
+    grid-template-columns:220px 1fr;
+    grid-template-rows:auto 1fr;
+  }
+  header.topbar{
+    grid-column:1 / -1;
+    grid-row:1;
+  }
+  nav.bottom{
+    position:relative;   /* (était static) : sert de repère à la pastille de verre */
+    grid-row:2; grid-column:1;
+    flex-direction:column;
+    box-shadow:none;
+    border-right:1px solid var(--color-divider);
+    padding-top:10px;
+  }
+  nav.bottom .nav-item{
+    flex:none;           /* hauteur naturelle : sans ça chaque entrée s'étirait sur 1/4 de l'écran */
+    flex-direction:row;
+    justify-content:flex-start;
+    gap:12px;
+    padding:12px 20px;
+  }
+  .glider--nav{border-radius:12px;}   /* la pastille glisse ici de haut en bas */
+  main{
+    grid-row:2; grid-column:2;
+    padding-bottom:24px;
+  }
+  .grid{ grid-template-columns:repeat(4,1fr); }
+}
+
+/* ---- Grand écran : un peu plus de respiration ---- */
+@media (min-width:1280px){
+  .phone{ max-width:1280px; }
+}
+
+/*
+  Limite connue à traiter plus tard : .sticky-cta (fiche produit) et .toast
+  sont en position:fixed avec max-width:420px centré sur la fenêtre entière,
+  pas sur le cadre .phone. Sur desktop (.phone élargi), ils restent donc
+  visuellement centrés sur la page plutôt que sur le contenu — acceptable
+  pour l'instant, à corriger si on affine encore le desktop.
+*/

@@ -1,0 +1,100 @@
+/* ==========================================================
+   BASE — reset et structure générale de l'application
+   ========================================================== */
+
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{
+  font-family:var(--font-body);
+  background:var(--color-page);
+  color:var(--color-text);
+  display:flex;
+  justify-content:center;
+  min-height:100vh;
+}
+.phone{
+  width:100%;
+  max-width:420px;
+  min-height:100vh;
+  background:var(--color-background);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+}
+
+/* ---- Écran de démarrage (structure — contenu dans screens.css) ----
+   Charte : fond bleu nuit uni, logo au centre, slogan. Sobre et rapide. */
+#splash{
+  position:absolute; inset:0; z-index:100; overflow:hidden;
+  background:var(--color-primary);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  transition:opacity .4s ease, visibility .4s ease;
+  /* Filet de sécurité : si le JS plante, l'écran de démarrage disparaît quand même */
+  animation:splashFailsafe .4s ease 8s forwards;
+}
+@keyframes splashFailsafe{
+  to{opacity:0; visibility:hidden; pointer-events:none;}
+}
+#splash.hide{opacity:0; visibility:hidden; pointer-events:none;}
+
+/* ---- Header ---- */
+header.topbar{
+  background:var(--color-primary);
+  color:#fff;
+  padding:10px 16px;
+  display:flex; align-items:center;
+  flex-shrink:0;
+}
+.topbar-brand{display:flex;align-items:center;gap:9px;min-width:0;}
+.topbar-icon{
+  height:32px; width:auto;
+  display:block;
+  flex-shrink:0;
+}
+.topbar-wordmark{
+  font-family:var(--font-heading);
+  font-weight:700;
+  font-size:15.5px;
+  color:#fff;
+  letter-spacing:.2px;
+  white-space:nowrap;
+}
+.topbar-wordmark .accent{color:var(--color-accent);}
+.header-actions{margin-left:auto; display:flex; align-items:center; gap:6px;}
+
+/* ---- Zone de contenu principale + gestion des écrans ---- */
+main{flex:1; overflow-y:auto; padding-bottom:84px;}
+.screen{display:none; animation:fadeIn .25s ease;}
+.screen.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+/* ---- Navigation basse (rôle Client) ---- */
+nav.bottom{
+  position:absolute;bottom:0;left:0;right:0;background:var(--color-surface);
+  box-shadow:var(--shadow-up);display:flex;z-index:30;
+}
+nav.bottom .nav-item{
+  flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 0 8px;cursor:pointer;color:var(--color-muted);
+}
+nav.bottom .nav-item.active{color:var(--color-accent);}
+nav.bottom .nav-item span{font-size:10px;font-weight:600;}
+
+/* ---- Accessibilité : respecter la préférence système "réduire les animations" ---- */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration:0.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.01ms !important;
+    scroll-behavior:auto !important;
+  }
+}
+
+/* ---- Changement de thème : fondu doux (classe posée ~350 ms par toggleTheme(), js/theme.js) ---- */
+.theme-fade, .theme-fade *, .theme-fade *::before, .theme-fade *::after{
+  transition:
+    background-color var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out),
+    box-shadow var(--duration-base) var(--ease-out);
+}
